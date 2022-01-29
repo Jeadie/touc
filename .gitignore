@@ -1,0 +1,11 @@
+# Source maps
+*.js.map
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+#
+dist/**
+node_modules/*
