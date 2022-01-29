@@ -1,52 +1,90 @@
 {
-    "name": "jeadi-touch",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "build": "./node_modules/.bin/tsc",
-        "build:dev": "./node_modules/.bin/ts-node --files src/index.ts",
-        "start": "node ./dist/src/index.js",
-        "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon",
-        "start:staging": "NODE_ENV=staging npm start",
-        "start:prod": "NODE_ENV=production npm start",
-        "docker": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up\"",
-        "docker:rebuild": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up --build\"",
-        "docker:start": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up\"",
-        "test": "npm run lint",
-        "lint": "prettier --check \"src/*.ts\"",
-        "lint:fix": "prettier --write \"src/*.ts\""
-    },
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "bootstrap": "^4.5.0",
-        "compression": "^1.7.4",
-        "config": "^3.3.1",
-        "cookie-parser": "^1.4.5",
-        "highlight.js": "^10.4.1",
-        "jquery": "^3.5.1",
-        "marked": "^4.0.10",
-        "moment": "^2.26.0",
-        "node-sass": "^4.14.1",
-        "popper.js": "^1.15.0"
-    },
-    "devDependencies": {
-        "@types/body-parser": "^1.19.0",
-        "@types/config": "0.0.34",
-        "@types/marked": "^0.6.5",
-        "@types/node": "^11.15.16",
-        "@typescript-eslint/eslint-plugin": "^1.13.0",
-        "@typescript-eslint/parser": "^1.13.0",
-        "prettier": "^1.19.1",
-        "copyfiles": "^2.3.0",
-        "eslint": "^5.16.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "husky": "^1.3.1",
-        "ts-node": "^8.10.2",
-        "typescript": "^3.9.5"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint"
-        }
+  "name": "jeadi-touch",
+  "version": "0.1.0",
+  "main": "dist/lib/*.js",
+  "typings": "dist/types/*.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "build:dev": "./node_modules/.bin/ts-node --files src/index.ts",
+    "docker": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up\"",
+    "docker:rebuild": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up --build\"",
+    "docker:start": "bash -c \"trap 'docker-compose down' EXIT; docker-compose up\"",
+    "lint": "prettier --check \"src/*.ts\"",
+    "lint:fix": "prettier --write \"src/*.ts\"",
+    "start": "node ./dist/src/index.js",
+    "start:dev": "NODE_ENV=development ./node_modules/.bin/nodemon",
+    "start:staging": "NODE_ENV=staging npm start",
+    "start:prod": "NODE_ENV=production npm start",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "test": "jest --coverage",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "test:watch": "jest --coverage --watch"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
+    "compression": "^1.7.4",
+    "config": "^3.3.1",
+    "cookie-parser": "^1.4.5",
+    "highlight.js": "^10.4.1",
+    "jquery": "^3.5.1",
+    "marked": "^4.0.10",
+    "moment": "^2.26.0",
+    "node-sass": "^4.14.1",
+    "popper.js": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/config": "0.0.34",
+    "@types/marked": "^0.6.5",
+    "@types/jest": "^23.3.2",
+    "@types/node": "^11.15.16",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "prettier": "^1.19.1",
+    "copyfiles": "^2.3.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^1.3.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "jest": "^23.6.0",
+    "jest-config": "^23.6.0",
+    "ts-jest": "^23.10.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
     }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.{js,ts}"
+    ]
+  }
 }

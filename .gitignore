@@ -1,6 +1,9 @@
 # Source maps
 *.js.map
 
+# Test artifacts
+coverage/
+
 # Logs
 logs
 *.log

@@ -1,3 +1,5 @@
-import App from "./app";
-
-console.log(App);
+export default class App {
+  public construct() {
+    console.log("Constructing App...");
+  }
+}
