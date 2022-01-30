@@ -17,6 +17,7 @@
     "start:prod": "webpack --mode production",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "jest --coverage",
+    "site:test": "npm run-script start:prod && python3 -m http.server",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "test:watch": "jest --coverage --watch"
   },

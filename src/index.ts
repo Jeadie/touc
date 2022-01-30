@@ -1,5 +1,15 @@
-export default class App {
+class Touc {
   public construct() {
-    console.log("Constructing App...");
+    alert("Constructing Touc...");
+  }
+  public add(s: string): void {
+    let element = document.getElementById("main");
+    if (element != null) {
+      element.innerText += "+ " + s;
+    }
   }
 }
+var touc = new Touc();
+touc.add("Hello World");
+
+export default touc;

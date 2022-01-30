@@ -1,4 +1,4 @@
-import Touc from "../src"
+import touc from "../src"
 
 describe("Initial Test", () => {
   it("works if true is truthy", () => {
@@ -6,6 +6,6 @@ describe("Initial Test", () => {
   })
 
   it("Touc is instantiable", () => {
-    expect(new Touc()).toBeInstanceOf(Touc)
+    expect(touc).toBeTruthy()
   })
 })
