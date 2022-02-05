@@ -4,7 +4,7 @@ export default class Queue<T> {
    */
 
   callbackFns: { [topic: string]: ((x: T) => any)[] } = {};
-  allTopic: string = "ALL";
+  allTopic: string = "ALL"; // Listen to all topics.
 
   publish = (topic: string, ...args: T[]) => {
     if (this.callbackFns[topic]) {
