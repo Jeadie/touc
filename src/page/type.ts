@@ -1,3 +1,4 @@
 export interface PageEvent {
-    // ... TODO
+    event: Event,
+    element: Element
 }
